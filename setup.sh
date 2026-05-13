@@ -1,52 +1,32 @@
 #!/bin/bash
-echo "🔥 NEXUS Portfolio Shop - Caveman Setup Script 🔥"
-echo ""
+echo "🦍 CAVEMAN SETUP START..."
 
-# Check if .env exists
+# Install all dependencies
+npm install --legacy-peer-deps
+npm install three gsap @studio-freight/lenis @google/generative-ai framer-motion lucide-react clsx tailwind-merge
+
+# Create .env if not exists
 if [ ! -f .env ]; then
-    echo "📝 Creating .env file..."
-    cp .env.example .env
-    echo "✅ .env created"
-else
-    echo "✅ .env already exists"
+  cat > .env << 'ENVEOF'
+APP_NAME=NEXUS
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://localhost:8000
+VITE_GEMINI_API_KEY=your_gemini_api_key_here
+ENVEOF
 fi
 
-# Generate app key
-echo "🔑 Generating app key..."
-php artisan key:generate
-echo "✅ App key generated"
-
-# Install Node dependencies
-echo "📦 Installing Node dependencies (this takes time)..."
-npm install --legacy-peer-deps
-echo "✅ Dependencies installed"
-
-# Build assets
-echo "🏗️ Building assets..."
-npm run build
-echo "✅ Assets built"
-
-# Clear caches
-echo "🧹 Clearing caches..."
-php artisan config:clear
-php artisan cache:clear
-php artisan view:clear
-echo "✅ Caches cleared"
-
 echo ""
-echo "=========================================="
-echo "✅ SETUP COMPLETE!"
-echo "=========================================="
+echo "✅ Setup complete!"
 echo ""
-echo "📌 NEXT STEPS:"
+echo "🦍 NEXT STEPS:"
 echo "1. Edit .env and add your Gemini API key:"
-echo "   VITE_GEMINI_API_KEY=your_actual_key_here"
+echo "   VITE_GEMINI_API_KEY=your_actual_key"
 echo ""
-echo "2. Start the server:"
-echo "   php artisan serve"
+echo "2. Run dev server:"
+echo "   npm run dev"
 echo ""
-echo "3. Open browser:"
-echo "   http://localhost:8000"
+echo "3. Open http://localhost:5173"
 echo ""
-echo "🚀 Ready to sell to Adobe, caveman style!"
-echo "=========================================="
+echo "🦍 NEXUS ready to sell!"
